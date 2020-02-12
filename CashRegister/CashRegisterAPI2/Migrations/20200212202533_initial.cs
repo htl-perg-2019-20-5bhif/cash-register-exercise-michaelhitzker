@@ -41,9 +41,9 @@ namespace CashRegisterAPI2.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductId = table.Column<int>(nullable: false),
-                    AmountPieces = table.Column<int>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
                     TotalPrice = table.Column<double>(nullable: false),
-                    ReceiptId = table.Column<int>(nullable: false)
+                    ReceiptId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,7 +59,7 @@ namespace CashRegisterAPI2.Migrations
                         column: x => x.ReceiptId,
                         principalTable: "Receipts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

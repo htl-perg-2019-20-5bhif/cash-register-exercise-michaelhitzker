@@ -1,9 +1,13 @@
 ﻿using CashRegisterAPI2.Model;
+using Polly;
 using Prism.Commands;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace CashRegister
@@ -18,6 +22,12 @@ namespace CashRegister
         public ObservableCollection<CashRegister.Model.ReceiptLine> ShoppingBasket { get; set; }
 
         public DelegateCommand<int?> AddToBasketCommand { get; }
+
+        private readonly HttpClient HttpClient = new HttpClient
+        {
+            BaseAddress = new Uri("http://localhost:64196"),
+            Timeout = TimeSpan.FromSeconds(500)
+        };
 
 
         private double TotalPriceValue;
@@ -36,42 +46,26 @@ namespace CashRegister
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly AsyncPolicy RetryPolicy = Policy.Handle<HttpRequestException>().RetryAsync(5);
+
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Products = new ObservableCollection<Product> {
-                new Product()
-                {
-                    ProductName = "Bananen 1kg",
-                    Id= 1,
-                    UnitPrice = 2.99
-                },
-                new Product()
-                {
-                    ProductName = "Äpfel 1kg",
-                    Id= 2,
-                    UnitPrice = 1.99
-                },
-                new Product()
-                {
-                    ProductName = "Trauben Weiß 500g",
-                    Id= 3,
-                    UnitPrice = 0.99
-                },
-                new Product()
-                {
-                    ProductName = "Himbeeren 125g",
-                    Id= 4,
-                    UnitPrice =1.29
-                }
-            };
-
             ShoppingBasket = new ObservableCollection<CashRegister.Model.ReceiptLine>();
 
             AddToBasketCommand = new DelegateCommand<int?>(OnAddToBasket);
             this.DataContext = this;
+
+            Loaded += async (_, __) => await this.InitAsync();
+        }
+
+        public async Task InitAsync()
+        {
+            var productsString = await RetryPolicy.ExecuteAndCaptureAsync(
+                async () => await HttpClient.GetStringAsync("/api/products"));
+            Products = JsonSerializer.Deserialize<ObservableCollection<Product>>(productsString.Result);
         }
 
         private void OnAddToBasket(int? productId)

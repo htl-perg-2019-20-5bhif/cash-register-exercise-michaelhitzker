@@ -1,25 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CashRegisterAPI2.Model
 {
     public class ReceiptLine
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [Required]
+        [JsonPropertyName("productId")]
         public int ProductId { get; set; }
 
+        [JsonPropertyName("product")]
         public Product Product { get; set; }
 
         [Required]
-        public int AmountPieces { get; set; }
+        [JsonPropertyName("amount")]
+        public int Amount { get; set; }
 
         [Required]
+        [JsonPropertyName("totalPrice")]
         public double TotalPrice { get; set; }
-
-        [Required]
-        public int ReceiptId { get; set; }
-
-        public Receipt Receipt { get; set; }
     }
 }

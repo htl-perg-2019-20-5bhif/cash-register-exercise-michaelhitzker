@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29521.150
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegister", "CashRegister\CashRegister.csproj", "{3C25DEAE-D3D1-4602-871B-0F622DC53DFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashRegister", "CashRegister\CashRegister.csproj", "{3C25DEAE-D3D1-4602-871B-0F622DC53DFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegisterAPI2", "CashRegisterAPI2\CashRegisterAPI2.csproj", "{45CC8B34-16A7-4657-A070-A9CB7AFA5067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashRegisterAPI2", "CashRegisterAPI2\CashRegisterAPI2.csproj", "{45CC8B34-16A7-4657-A070-A9CB7AFA5067}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashRegisterAPI3", "CashRegisterAPI3\CashRegisterAPI3.csproj", "{A1ED5FB8-B1C9-4AD9-90A1-DA0DC50F738F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{45CC8B34-16A7-4657-A070-A9CB7AFA5067}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CC8B34-16A7-4657-A070-A9CB7AFA5067}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CC8B34-16A7-4657-A070-A9CB7AFA5067}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1ED5FB8-B1C9-4AD9-90A1-DA0DC50F738F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1ED5FB8-B1C9-4AD9-90A1-DA0DC50F738F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1ED5FB8-B1C9-4AD9-90A1-DA0DC50F738F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1ED5FB8-B1C9-4AD9-90A1-DA0DC50F738F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
